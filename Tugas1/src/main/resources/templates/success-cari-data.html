@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Cari Penduduk</title>
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/datatables.min.css" />
+<script type="text/javascript" src="/js/datatables.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#view-data').DataTable();
+	});
+</script>
+</head>
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	<br></br>
+	<center>
+		<h4
+			th:text="'Lihat Data Penduduk Di Kota ' + ${nama_kota} 
+	+ ', Kecamatan ' + ${nama_kecamatan} + ', Kelurahan ' + ${nama_kelurahan}"></h4>
+	</center>
+	<br></br>
+	<hr></hr>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-sm-6">
+				<strong><p>Penduduk Tertua</p></strong>
+				<table class="display" cellspacing="0" style="width: 70%">
+					<tr>
+						<td><strong>NIK</strong></td>
+						<td th:text="${pendudukTua.nik}"></td>
+					</tr>
+					<tr>
+						<td><strong>Nama</strong></td>
+						<td th:text="${pendudukTua.nama}"></td>
+					</tr>
+					<tr>
+						<td><strong>Tanggal Lahir</strong></td>
+						<td th:text="${pendudukTua.tanggal_lahir}"></td>
+					</tr>
+				</table>
+			</div>
+		
+			<div class="col-lg-6 col-sm-6">
+				<strong><p>Penduduk Termuda</p></strong>
+				<table class="display" cellspacing="0" style="width: 70%">
+					<tr>
+						<td><strong>NIK</strong></td>
+						<td th:text="${pendudukMuda.nik}"></td>
+					</tr>
+					<tr>
+						<td><strong>Nama</strong></td>
+						<td th:text="${pendudukMuda.nama}"></td>
+					</tr>
+					<tr>
+						<td><strong>Tanggal Lahir</strong></td>
+						<td th:text="${pendudukMuda.tanggal_lahir}"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<hr></hr>
+	<br></br>
+	<div class="container">
+		<table id="view-data" class="display" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>NIK</th>
+					<th>Nama</th>
+					<th>Jenis Kelamin</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="penduduk,iterationStatus: ${listPenduduk}">
+					<td th:text="${penduduk.nik}">NIK</td>
+					<td th:text="${penduduk.nama}">NamaLengkap</td>
+					<td
+						th:text="${penduduk.jenis_kelamin>=1} ? 'Perempuan' : 'Laki-Laki'"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

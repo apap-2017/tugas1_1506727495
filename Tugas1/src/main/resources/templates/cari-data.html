@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Lihat Data Penduduk</title>
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div th:replace="fragments/fragment :: header"></div>
+	<br></br>
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div class="container">
+				<h4 th:if="${flag_kt == true and flag_kc == null}"
+					th:text="'Lihat Data Penduduk Berdasarkan Kota di ' + ${nama_kota} "></h4>
+				<h4 th:unless="${flag_kt == true}"
+					th:text="'Lihat Data Penduduk Berdasarkan kota'"></h4>
+				<h4 th:if="${flag_kc == true}"
+					th:text="'Lihat Data Penduduk Berdasarkan Kecamatan di ' + ${nama_kota} + ', Kecamatan ' + ${nama_kecamatan}"></h4>
+
+				<form th:action="'/penduduk/cari'" method="get">
+					<div th:if="${flag_kt==true}" class="form-group">
+						<label for="kota">Kota/Kabupaten</label> <select
+							class="form-control" name="kt" th:value="${id_kota}"
+							readonly="true">
+							<option th:value="${id_kota}" th:text="${nama_kota}"></option>
+						</select>
+					</div>
+					<div th:unless="${flag_kt==true}" class="form-group">
+						<label for="kota">Kota/Kabupaten</label> <select
+							class="form-control" name="kt">
+							<option th:each="kota,iterationStatus: ${kotas}"
+								th:value="${kota.id}" th:text="${kota.nama_kota}"></option>
+						</select>
+					</div>
+					<div th:if="${flag_kota==true}">
+						<div th:if="${flag_kc==true}" class="form-group">
+							<label for="kecamatan">Kecamatan</label> <select
+								class="form-control" name="kc" th:value="${id_kecamatan}"
+								readonly="true">
+								<option th:value="${id_kecamatan}" th:text="${nama_kecamatan}"></option>
+							</select>
+						</div>
+						<div th:unless="${flag_kc==true}" class="form-group">
+							<label for="kecamatan">Kecamatan</label> <select
+								class="form-control" name="kc">
+								<option th:each="kecamatan,iterationStatus: ${kecamatans}"
+									th:value="${kecamatan.id}"
+									th:text="${kecamatan.nama_kecamatan}"></option>
+							</select>
+						</div>
+						<div th:if="${flag_kec == true}">
+							<div th:if="${flag_kl==true}" class="form-group">
+								<label for="kelurahan">Kelurahan</label> <select
+									class="form-control" name="kl" th:value="${id_kelurahan}"
+									readonly="true">
+									<option th:value="${id_kelurahan}" th:text="${nama_kelurahan}"></option>
+								</select>
+							</div>
+							<div th:unless="${flag_kl==true}" class="form-group">
+
+								<label for="kelurahan">Kelurahan</label> <select
+									class="form-control" name="kl">
+									<option th:each="kelurahan,iterationStatus: ${kelurahans}"
+										th:value="${kelurahan.id}"
+										th:text="${kelurahan.nama_kelurahan}"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

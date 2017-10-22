@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Tambah Penduduk</title>
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	<h2>Sukses !</h2>
+	<h7 th:text="'Penduduk dengan NIK '+ ${keluarga.nomor_kk} + ' berhasil ditambahkan'"  ></h7>
+</body>
+</html>

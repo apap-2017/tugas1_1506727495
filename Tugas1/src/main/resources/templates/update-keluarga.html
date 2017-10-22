@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Update Keluarga</title>
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8 text-left">
+				<h1 class="page-header">Update Keluarga</h1>
+				<form th:object="${keluarga}" th:action="'/keluarga/ubah/' + ${keluarga.nomor_kk}"
+					method="post">
+					<div class="form-group">
+						<label for="nama">Nomor Kartu Keluarga</label> <input type="text"
+							class="form-control" id="nomor_kk" readonly="true"
+							name="nomor_kk" th:value="${keluarga.nomor_kk}" th:field="*{nomor_kk}"></input>
+					</div>
+					<div class="form-group">
+						<label for="alamat">Alamat</label> <input type="text"
+							class="form-control" id="alamat" name="alamat"
+							th:value="${keluarga.alamat}" th:field="*{alamat}"></input>
+					</div>
+					<div class="form-group">
+						<label for="RT">RT</label> <input type="text" class="form-control"
+							id="RT" name="RT" th:value="${keluarga.RT}" th:field="*{RT}"></input>
+					</div>
+					<div class="form-group">
+						<label for="RW">RW</label> <input type="text" class="form-control"
+							id="RW" name="RW" th:value="${keluarga.RW}" th:field="*{RW}"></input>
+					</div>
+					<div class="form-group">
+						<label for="nama_kelurahan">Kelurahan/Desa</label> <input type="text"
+							class="form-control" id="kelurahan" name="nama_kelurahan"
+							th:value="${kelurahan}"></input>
+					</div>
+					<div class="form-group">
+						<label for="nama_kecamatan">Kecamatan</label> <input type="text"
+							class="form-control" id="kecamatan" name="nama_kecamatan"
+							th:value="${kecamatan}"></input>
+					</div>
+					<div class="form-group">
+						<label for="nama_kota">Kota</label> <input type="text"
+							class="form-control" id="kota" name="nama_kota"
+							th:value="${kota}"></input>
+					</div>
+					<label for="kota">Keberlakuan KK</label> <select
+						class="form-control" name="is_tidak_berlaku"
+						th:value="${keluarga.is_tidak_berlaku}" th:field="*{is_tidak_berlaku}">
+						<option value="0" disabled="disabled">Berlaku</option>
+							<option value="1" disabled="disabled">Tidak Berlaku</option>
+					</select>
+					<div>
+						<input type="hidden" name="nomor_kk_lama" th:value="${nomor_kk}"></input>
+						<input type="hidden" name="nama_kecamatan_lama"
+							th:value="${kecamatan}"></input> <input type="hidden"
+							name="nama_kelurahan_lama" th:value="${kelurahan}"></input> <input
+							type="hidden" name="nama_kota_lama" th:value="${kota}"></input>
+					</div>
+					<br></br>
+					<button type="submit" class="btn btn-ptimary" name="action"
+						value="submit">Submit</button>
+				</form>
+
+
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+	</div>
+</body>
+</html>
